@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "dnf -y install golang",
+  "buildCommand": "cd exampleSite && hugo --minify --gc -b \"https://${VERCEL_PROJECT_PRODUCTION_URL:-$VERCEL_URL}\"",
+  "outputDirectory": "exampleSite/public",
+  "cleanUrls": true
+}
