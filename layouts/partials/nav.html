@@ -1,0 +1,11 @@
+{{- with .Site.Menus.main }}
+<nav class="primary-nav" aria-label="{{ i18n "primaryNavigation" | default "Primary" }}">
+  <ul>
+    {{- range . }}
+    <li>
+      <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
+    </li>
+    {{- end }}
+  </ul>
+</nav>
+{{- end }}

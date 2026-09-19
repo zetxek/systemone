@@ -1,0 +1,82 @@
+/*
+ * Systemone — accessibility and print rules. Stylesheet order 6/8.
+ * Default motion is zero (§3 "Motion"); this file reinforces that under
+ * prefers-reduced-motion, and adds forced-colors and print handling.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+@media (forced-colors: active) {
+  :root {
+    --shadow-hard: none;
+    --shadow-small: none;
+  }
+
+  .primary-nav a[aria-current="page"] {
+    outline: 2px solid LinkText;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible,
+  [tabindex]:focus-visible {
+    box-shadow: none;
+    outline: 2px solid CanvasText;
+    outline-offset: 2px;
+  }
+}
+
+@media print {
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .primary-nav {
+    display: none !important;
+  }
+
+  a {
+    color: #000000;
+    text-decoration: underline;
+  }
+
+  .prose pre,
+  .prose code {
+    background: #ffffff;
+    color: #000000;
+    border-color: #000000;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+  }
+}

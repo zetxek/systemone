@@ -1,0 +1,39 @@
+# theme.toml template for a Hugo theme
+# See https://github.com/gohugoio/hugoThemes#themetoml for an example
+
+name = "Systemone"
+license = "MIT"
+licenselink = "https://github.com/zetxek/systemone/blob/main/LICENSE"
+description = "Editorial neubrutalism for Hugo: oversized tightly-tracked display type, monospace utility text, square geometry, thin ink rules and hard offset shadows on warm paper. Hand-written CSS, zero build step, zero runtime dependencies, zero webfonts."
+homepage = "https://github.com/zetxek/systemone"
+demosite = "https://systemone-demo.vercel.app"
+min_version = "0.146.0"
+
+tags = [
+    "responsive",
+    "minimal",
+    "editorial",
+    "blog",
+    "typography",
+    "dark",
+    "dark-mode",
+    "light",
+    "accessible",
+    "no-javascript",
+    "print-friendly",
+]
+
+features = [
+    "dark-mode",
+    "blog",
+    "accessible",
+    "no build step",
+    "no runtime dependencies",
+    "no webfonts",
+    "table of contents",
+    "print-friendly",
+]
+
+[author]
+name = "Adrián Moreno Peña"
+homepage = "https://www.adrianmoreno.info"

@@ -1,0 +1,258 @@
+/*
+ * Systemone / INK PAPER — canonical design tokens.
+ *
+ * Source of truth: docs/DESIGN-SYSTEM.md §2 (light tokens) and §3 (dark
+ * "ink paper" overrides). This file is the ONLY place that defines baseline
+ * design values — every other stylesheet consumes var(--token).
+ *
+ * Rem values assume the browser default 16px base. The root font size is
+ * deliberately NOT fixed anywhere in this theme, so user font-size
+ * preferences are respected.
+ */
+
+:root {
+  /* Core palette: light appearance */
+  --paper: #f7f6f0;
+  --ink: #171715;
+  --panel: #fffefa;
+  --line: #c7c5bb;
+  --muted: #66645e;
+
+  --lime: #d4ff3f;
+  --pink: #ee5ba6;
+  --red: #b42318;
+  --link: #0000ee;
+
+  /* Foreground for lime/pink fills: invariant across appearances */
+  --accent-ink: #171715;
+
+  /* Semantic and interaction roles */
+  --error: var(--red);
+  --error-on-fill: #f7f6f0;
+  --success-bg: var(--lime);
+  --success-ink: var(--accent-ink);
+  --selection-bg: var(--pink);
+  --selection-ink: var(--accent-ink);
+  --shadow-ink: #171715;
+
+  /* Terminal palette: invariant across appearances */
+  --code-bg: #171715;
+  --code-fg: #f7f6f0;
+  --code-muted: #b6b3a8;
+  --code-key: #d4ff3f;
+  --code-string: #ee5ba6;
+  --code-number: #8fb3ff;
+  --code-error: #ff8a80;
+  --code-line-bg: #242420;
+
+  /* Retro-GUI chrome */
+  --gui-face: #c7c5bb;
+  --gui-highlight: #fffefa;
+  --gui-light: #f7f6f0;
+  --gui-mid: #66645e;
+  --gui-dark: #171715;
+
+  /* System-only font stacks */
+  --font-display: Arial, Helvetica, sans-serif;
+  --font-prose: Arial, Helvetica, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
+  --font-serif: "Times New Roman", Times, serif;
+
+  /* Type sizes */
+  --text-display-xl: clamp(3rem, calc(1rem + 10vw), 9.375rem);
+  --text-display: clamp(2.5rem, calc(1.5rem + 4vw), 5rem);
+  --text-h2: clamp(1.75rem, calc(1.25rem + 1.5vw), 2.5rem);
+  --text-h3: clamp(1.25rem, calc(1.0625rem + 0.75vw), 1.5rem);
+  --text-h4: 1.125rem;
+  --text-h5: 1rem;
+  --text-h6: 0.875rem;
+
+  --text-body: 1rem;
+  --text-prose: 1.125rem;
+  --text-prose-mono: 1rem;
+  --text-small: 0.875rem;
+  --text-meta: 0.8125rem;
+  --text-label: 0.75rem;
+  --text-code: 0.9375rem;
+  --text-inline-code: 0.9em;
+  --text-epigraph: 1.375rem;
+
+  /* Weights */
+  --weight-body: 400;
+  --weight-strong: 700;
+  --weight-display: 900;
+  --weight-label: 900;
+
+  /* Leading */
+  --leading-display-xl: 1.02;
+  --leading-display: 1.05;
+  --leading-h2: 1.1;
+  --leading-h3: 1.2;
+  --leading-h4: 1.3;
+  --leading-compact: 1.4;
+  --leading-body: 1.5;
+  --leading-prose: 1.65;
+  --leading-prose-mono: 1.75;
+  --leading-code: 1.6;
+  --leading-label: 1.25;
+  --leading-script-display: 1.2;
+
+  /* Tracking */
+  --tracking-display-xl: -0.07em;
+  --tracking-display: -0.06em;
+  --tracking-h2: -0.04em;
+  --tracking-h3: -0.025em;
+  --tracking-h4: -0.01em;
+  --tracking-body: 0em;
+  --tracking-label: 0.08em;
+  --tracking-control: 0.04em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 0.125rem;
+  --space-2: 0.25rem;
+  --space-3: 0.5rem;
+  --space-4: 0.75rem;
+  --space-5: 1rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 3rem;
+  --space-9: 4rem;
+  --space-10: 6rem;
+
+  /* Layout */
+  --container-max: 1160px;
+  --page-gutter: 16px;
+  --page-width: min(var(--container-max), calc(100% - 32px));
+  --grid-columns: 12;
+  --grid-gap: 24px;
+  --measure-prose: 68ch;
+  --measure-deck: 42rem;
+  --measure-hero: 18ch;
+  --measure-title: 22ch;
+
+  /* Structural lines */
+  --border-width: 1px;
+  --rule: 1px solid var(--ink);
+  --rule-subtle: 1px solid var(--line);
+  --rule-terminal: 1px solid var(--code-fg);
+  --blockquote-rule-width: 3px;
+  --bevel-layer-width: 1px;
+
+  /* Hard shadows only */
+  --shadow-hard: 3px 3px 0 0 var(--shadow-ink);
+  --shadow-small: 2px 2px 0 0 var(--shadow-ink);
+  --shadow-none: none;
+
+  /* Focus: two contrasting, zero-blur bands */
+  --focus-band-width: 2px;
+  --focus-extent: 4px;
+  --focus-ring:
+    0 0 0 2px var(--paper),
+    0 0 0 4px var(--ink);
+
+  /* Geometry */
+  --radius: 0px;
+  --control-min-height: 44px;
+  --input-min-height: 48px;
+  --control-padding-inline: 16px;
+  --input-padding-block: 12px;
+  --input-padding-inline: 12px;
+  --checkbox-size: 20px;
+  --icon-size: 16px;
+  --icon-size-large: 20px;
+  --icon-stroke: 1.5px;
+  --avatar-size: 48px;
+
+  /* Component rhythm */
+  --card-padding: 24px;
+  --code-padding: 24px;
+  --section-gap: 64px;
+  --prose-block-gap: 24px;
+  --mark-padding: 0 0.08em;
+  --link-underline-width: 1px;
+  --link-underline-hover-width: 2px;
+  --link-underline-offset: 0.16em;
+
+  /* Ornament */
+  --ornament-edge-offset: 28px;
+  --ornament-bracket-size: 24px;
+
+  /* Motion */
+  --motion-duration: 0ms;
+}
+
+/*
+ * Dark appearance: "ink paper" — an inversion of the material relationship,
+ * not a generic blue-grey dashboard. All unspecified tokens remain
+ * unchanged (accent-ink, lime, pink, and the terminal palette are
+ * invariant across appearances).
+ *
+ * Default behavior follows prefers-color-scheme ("auto"). A site-level
+ * `design.appearance` param can pin `light` or `dark` regardless of OS
+ * preference — see the generated parameter-override stylesheet, which sets
+ * `data-appearance` on the root element and is loaded last.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-appearance="light"]) {
+    --paper: #171715;
+    --ink: #f7f6f0;
+    --panel: #242420;
+    --line: #53534b;
+    --muted: #b6b3a8;
+    --red: #ff8a80;
+    --link: #8fb3ff;
+    --error-on-fill: #171715;
+    --shadow-ink: #000000;
+    --gui-face: #242420;
+    --gui-highlight: #b6b3a8;
+    --gui-light: #53534b;
+    --gui-mid: #000000;
+    --gui-dark: #000000;
+  }
+}
+
+:root[data-appearance="dark"] {
+  --paper: #171715;
+  --ink: #f7f6f0;
+  --panel: #242420;
+  --line: #53534b;
+  --muted: #b6b3a8;
+  --red: #ff8a80;
+  --link: #8fb3ff;
+  --error-on-fill: #171715;
+  --shadow-ink: #000000;
+  --gui-face: #242420;
+  --gui-highlight: #b6b3a8;
+  --gui-light: #53534b;
+  --gui-mid: #000000;
+  --gui-dark: #000000;
+}
+
+/*
+ * Responsive token changes — §2 "Layout and responsive rules".
+ * Breakpoints are implementation constants (40rem / 60rem), not CSS
+ * variables, per the spec's own instruction. The un-overridden :root
+ * values above already equal the "60rem and above" row (12 columns,
+ * 24px gap, 64px section gap, 24px card/code padding).
+ */
+@media (max-width: 59.9375rem) and (min-width: 40rem) {
+  :root {
+    --grid-columns: 6;
+    --grid-gap: 16px;
+    --section-gap: 64px;
+    --card-padding: 24px;
+    --code-padding: 24px;
+  }
+}
+
+@media (max-width: 39.9375rem) {
+  :root {
+    --grid-columns: 4;
+    --grid-gap: 16px;
+    --section-gap: 48px;
+    --card-padding: 16px;
+    --code-padding: 16px;
+  }
+}

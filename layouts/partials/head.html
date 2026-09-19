@@ -1,0 +1,54 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+{{- $appearance := .Site.Params.design.appearance | default "auto" -}}
+{{- if not (in (slice "auto" "light" "dark") $appearance) -}}
+  {{- warnf "design.appearance %q is invalid (expected auto, light or dark); falling back to auto" $appearance -}}
+  {{- $appearance = "auto" -}}
+{{- end -}}
+{{- $colorScheme := "light dark" -}}
+{{- if eq $appearance "light" }}{{ $colorScheme = "light" }}{{ end -}}
+{{- if eq $appearance "dark" }}{{ $colorScheme = "dark" }}{{ end -}}
+<meta name="color-scheme" content="{{ $colorScheme }}" />
+
+<title>{{ if eq .Kind "404" }}{{ i18n "notFoundTitle" | default "Page not found" }} — {{ .Site.Title }}{{ else if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+{{- $description := "" }}
+{{- with .Description }}{{ $description = . }}{{ else }}{{ with .Summary }}{{ $description = . | plainify }}{{ else }}{{ with .Site.Params.description }}{{ $description = . }}{{ end }}{{ end }}{{ end }}
+{{- with $description }}
+<meta name="description" content="{{ . }}" />
+{{- end }}
+<link rel="canonical" href="{{ .Permalink }}" />
+
+{{- with .OutputFormats.Get "RSS" }}
+<link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}" />
+{{- end }}
+
+{{- /* Stylesheet order per docs/DESIGN-SYSTEM.md §7:
+       1 reset, 2 tokens+appearance, 3 base typography/layout, 4 components
+       (none yet), 5 prose/syntax, 6 accessibility/print, 7 generated
+       parameter overrides, 8 optional user stylesheet. */ -}}
+{{- $cssFiles := slice "css/reset.css" "css/tokens.css" "css/base.css" "css/prose.css" "css/a11y.css" -}}
+{{- $cssResources := slice -}}
+{{- range $cssFiles -}}
+  {{- with resources.Get . -}}
+    {{- $cssResources = $cssResources | append . -}}
+  {{- else -}}
+    {{- warnf "Systemone: expected stylesheet %q was not found" . -}}
+  {{- end -}}
+{{- end -}}
+{{- $paramsCSS := partial "params-css.html" . -}}
+{{- $cssResources = $cssResources | append (resources.FromString "css/params-override.css" $paramsCSS) -}}
+{{- with resources.Get "css/custom.css" -}}
+  {{- $cssResources = $cssResources | append . -}}
+{{- end -}}
+{{- $css := $cssResources | resources.Concat "css/systemone.css" -}}
+{{- if hugo.IsProduction }}
+  {{- $css = $css | minify | fingerprint -}}
+{{- end }}
+<link
+  rel="stylesheet"
+  href="{{ $css.RelPermalink }}"
+  {{- if hugo.IsProduction }}
+  integrity="{{ $css.Data.Integrity }}"
+  {{- end }} />

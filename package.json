@@ -1,0 +1,13 @@
+{
+  "name": "systemone",
+  "version": "0.1.0",
+  "description": "Editorial neubrutalism Hugo theme — hand-written CSS, zero build step, zero runtime dependencies.",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "serve": "hugo server --source exampleSite --themesDir ../..",
+    "build": "hugo --source exampleSite --themesDir ../.. --minify --gc"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

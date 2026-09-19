@@ -1,0 +1,187 @@
+/*
+ * Systemone — article prose. Stylesheet order 5/8.
+ * Covers only the baseline reading elements needed for Stage 1 (headings,
+ * paragraphs, links, lists, blockquotes, hr, inline code, figures, mark).
+ * The full terminal/code component, footnotes, tables and admonitions are
+ * later-stage work — see docs/BRIEF-stage1.md "out of scope".
+ */
+
+.prose {
+  font-family: var(--font-prose);
+  font-size: var(--text-prose);
+  line-height: var(--leading-prose);
+  max-width: var(--measure-prose);
+}
+
+.prose[data-prose="mono"] {
+  font-family: var(--font-mono);
+  font-size: var(--text-prose-mono);
+  line-height: var(--leading-prose-mono);
+}
+
+.prose > * + * {
+  margin-top: var(--prose-block-gap);
+}
+
+.prose > *:first-child {
+  margin-top: 0;
+}
+
+.prose h2 {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-5);
+}
+
+.prose h3 {
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-4);
+}
+
+.prose h4,
+.prose h5,
+.prose h6 {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.prose h2:first-child,
+.prose h3:first-child,
+.prose h4:first-child,
+.prose h5:first-child,
+.prose h6:first-child {
+  margin-top: 0;
+}
+
+.prose strong {
+  font-weight: var(--weight-strong);
+}
+
+.prose a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: var(--link-underline-width);
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.prose a:hover {
+  text-decoration-thickness: var(--link-underline-hover-width);
+}
+
+.prose mark,
+.prose .mark {
+  background: var(--lime);
+  color: var(--accent-ink);
+  padding: var(--mark-padding);
+  border-radius: var(--radius);
+}
+
+.prose .mark--pink {
+  background: var(--pink);
+  color: var(--accent-ink);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: var(--space-3);
+}
+
+.prose ul ul,
+.prose ul ol,
+.prose ol ul,
+.prose ol ol {
+  margin: var(--space-3) 0 0;
+  padding-left: 1.5em;
+}
+
+.prose input[type="checkbox"] {
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  accent-color: var(--lime);
+  vertical-align: middle;
+}
+
+.prose blockquote {
+  border-left: var(--blockquote-rule-width) solid var(--ink);
+  padding-left: var(--space-6);
+}
+
+.prose blockquote blockquote {
+  padding-left: var(--space-5);
+  margin-top: var(--space-3);
+}
+
+.prose blockquote cite {
+  display: block;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  font-style: normal;
+  color: var(--muted);
+}
+
+.prose hr {
+  border: none;
+  border-top: var(--rule);
+  margin-block: var(--space-8);
+}
+
+.prose figure {
+  margin: var(--space-7) 0;
+}
+
+.prose figcaption {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  line-height: var(--leading-compact);
+  color: var(--muted);
+}
+
+.prose img {
+  height: auto;
+}
+
+/* Inline code — §4.10. Code inside <pre> (fenced blocks) is excluded; the
+ * full terminal component is later-stage work, so fenced code only gets
+ * minimal readable styling below, not the header/copy-button anatomy. */
+.prose code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: var(--text-inline-code);
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 0.08em 0.24em;
+  border-radius: var(--radius);
+}
+
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-code);
+  line-height: var(--leading-code);
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border: var(--rule);
+  padding: var(--code-padding);
+  overflow-x: auto;
+  tab-size: 4;
+}
+
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}

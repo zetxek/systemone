@@ -1,0 +1,47 @@
+{{- /*
+  Generates the parameter-override stylesheet from the small validated
+  params API documented in docs/DESIGN-SYSTEM.md §7. Loaded LAST in the
+  concatenation order (see layouts/partials/head.html) so it can override
+  tokens.css. Stage 1 wires design.lime, design.pink and
+  design.containerMax; design.appearance is wired separately via the
+  data-appearance attribute set on <html> in baseof.html.
+*/ -}}
+{{- $design := .Site.Params.design -}}
+{{- $lime := "" -}}
+{{- $pink := "" -}}
+{{- $containerMax := "" -}}
+{{- $hexPattern := `^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$` -}}
+{{- $lengthPattern := `^[0-9]+(\.[0-9]+)?(px|rem|em)$` -}}
+{{- with $design.lime -}}
+  {{- if findRE $hexPattern . -}}
+    {{- $lime = . -}}
+  {{- else -}}
+    {{- warnf "design.lime %q is not a valid hex color; ignoring override" . -}}
+  {{- end -}}
+{{- end -}}
+{{- with $design.pink -}}
+  {{- if findRE $hexPattern . -}}
+    {{- $pink = . -}}
+  {{- else -}}
+    {{- warnf "design.pink %q is not a valid hex color; ignoring override" . -}}
+  {{- end -}}
+{{- end -}}
+{{- with $design.containerMax -}}
+  {{- if findRE $lengthPattern . -}}
+    {{- $containerMax = . -}}
+  {{- else -}}
+    {{- warnf "design.containerMax %q is not a valid CSS length; ignoring override" . -}}
+  {{- end -}}
+{{- end -}}
+:root {
+{{- if $lime }}
+  --lime: {{ $lime }};
+{{- end }}
+{{- if $pink }}
+  --pink: {{ $pink }};
+{{- end }}
+{{- if $containerMax }}
+  --container-max: {{ $containerMax }};
+  --page-width: min({{ $containerMax }}, calc(100% - 32px));
+{{- end }}
+}
