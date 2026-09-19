@@ -44,6 +44,7 @@ for a complete example):
 | `design.containerMax` | `1160px` | Advanced layout override |
 | `features.copyCode` | `true` | Progressive enhancement (later stage) |
 | `features.postTOC` | `true` | Still subject to heading-count threshold |
+| `features.appearanceToggle` | `true` | Reader-facing header control that cycles auto → light → dark, persisted in `localStorage`. Progressive enhancement: absent (not a dead button) with JavaScript disabled. |
 
 Arbitrary accent overrides (`design.lime` / `design.pink`) sit outside the
 spec's certified default contrast contract until independently rechecked —

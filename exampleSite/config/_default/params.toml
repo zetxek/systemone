@@ -25,5 +25,6 @@ description = "A demo site exercising the Systemone editorial-neubrutalism theme
   containerMax = "1160px"
 
 [features]
-  copyCode = true         # progressive enhancement (later stage)
-  postTOC = true          # still subject to heading-count threshold (later stage)
+  copyCode = true            # progressive enhancement (later stage)
+  postTOC = true             # still subject to heading-count threshold (later stage)
+  appearanceToggle = true    # reader-facing auto/light/dark control in the header

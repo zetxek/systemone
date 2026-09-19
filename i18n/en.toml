@@ -51,3 +51,18 @@ other = "Home"
 
 [notFoundPosts]
 other = "Posts"
+
+[appearanceToggleName]
+other = "Appearance"
+
+[appearanceToggleAction]
+other = "Activate to change."
+
+[appearanceAuto]
+other = "auto"
+
+[appearanceLight]
+other = "light"
+
+[appearanceDark]
+other = "dark"

@@ -1,0 +1,42 @@
+{{- /*
+  Progressive-enhancement script for the reader-facing appearance toggle
+  (docs/BRIEF-stage2-appearance.md). Inline and synchronous so the stored
+  choice applies before first paint, with no flash of the wrong appearance.
+  Guarded localStorage access; never throws if it is unavailable. The
+  button-reveal and click-cycle logic waits for DOMContentLoaded so the
+  button (rendered `hidden` in header.html) is guaranteed to exist.
+*/ -}}
+{{- if (site.Params.features.appearanceToggle | default true) }}
+<script>
+(function () {
+  var K = "systemone-appearance", root = document.documentElement, v = null;
+  try { v = localStorage.getItem(K); } catch (e) {}
+  if (v === "light" || v === "dark") root.setAttribute("data-appearance", v);
+  else if (v === "auto") root.removeAttribute("data-appearance");
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var btn = document.getElementById("appearance-toggle");
+    if (!btn) return;
+    var d = btn.dataset;
+    var labels = { auto: d.appearanceLabelAuto, light: d.appearanceLabelLight, dark: d.appearanceLabelDark };
+    function state() {
+      var s = root.getAttribute("data-appearance");
+      return s === "light" || s === "dark" ? s : "auto";
+    }
+    function render(s) {
+      btn.textContent = labels[s];
+      btn.setAttribute("aria-label", d.appearanceName + ": " + labels[s] + ". " + d.appearanceAction);
+    }
+    render(state());
+    btn.hidden = false;
+    btn.addEventListener("click", function () {
+      var next = { auto: "light", light: "dark", dark: "auto" }[state()];
+      if (next === "auto") root.removeAttribute("data-appearance");
+      else root.setAttribute("data-appearance", next);
+      try { localStorage.setItem(K, next); } catch (e) {}
+      render(next);
+    });
+  });
+})();
+</script>
+{{- end }}

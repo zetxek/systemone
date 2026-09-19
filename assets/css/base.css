@@ -264,6 +264,63 @@ summary:focus-visible,
 }
 
 /* ----------------------------------------------------------------------
+ * Appearance toggle — reader-facing auto/light/dark control (§4.1 header
+ * anatomy extension). Rendered `hidden`; revealed by the inline head
+ * script only once JS confirms it can drive the control (progressive
+ * enhancement — see layouts/partials/appearance-script.html).
+ *
+ * Border uses --rule (ink), not --line: per §3 "--line must not be the
+ * sole visible boundary of ... a button", so the pale decorative line
+ * token is not appropriate here even though it is otherwise the closest
+ * "structural" token for a hairline.
+ * -------------------------------------------------------------------- */
+
+/* Author CSS overrides the UA [hidden] rule regardless of specificity, so
+ * this must be stated explicitly or a JS-disabled visitor sees a dead
+ * button instead of no button at all. */
+.appearance-toggle[hidden] {
+  display: none;
+}
+
+.appearance-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--control-min-height);
+  min-width: var(--control-min-height);
+  padding-inline: var(--space-4);
+  border: var(--rule);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: var(--weight-label);
+  letter-spacing: var(--tracking-control);
+  text-transform: uppercase;
+}
+
+.appearance-toggle:hover {
+  background: var(--panel);
+}
+
+.appearance-toggle:active,
+html[data-appearance] .appearance-toggle:active {
+  background: var(--pink);
+  color: var(--accent-ink);
+}
+
+/* Current/selected state (§4 shared state contract): the reader has
+ * pinned an explicit appearance, rather than following "auto". */
+html[data-appearance] .appearance-toggle {
+  background: var(--lime);
+  color: var(--accent-ink);
+}
+
+html[data-appearance] .appearance-toggle:hover {
+  background: var(--pink);
+}
+
+/* ----------------------------------------------------------------------
  * Section label — "00 / INDEX" editorial identifiers
  * -------------------------------------------------------------------- */
 
