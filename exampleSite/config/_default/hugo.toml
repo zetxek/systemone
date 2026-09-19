@@ -1,4 +1,4 @@
-baseURL = "https://systemone-demo.example.com/"
+baseURL = "https://systemone-beta.vercel.app/"
 title = "Systemone Demo"
 locale = "en"
 
