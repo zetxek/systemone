@@ -6,7 +6,7 @@ license = "MIT"
 licenselink = "https://github.com/zetxek/systemone/blob/main/LICENSE"
 description = "Editorial neubrutalism for Hugo: oversized tightly-tracked display type, monospace utility text, square geometry, thin ink rules and hard offset shadows on warm paper. Hand-written CSS, zero build step, zero runtime dependencies, zero webfonts."
 homepage = "https://github.com/zetxek/systemone"
-demosite = "https://systemone-beta.vercel.app"
+demosite = "https://systemone-demo.vercel.app"
 min_version = "0.146.0"
 
 tags = [

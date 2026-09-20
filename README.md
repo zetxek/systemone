@@ -12,7 +12,7 @@ webfonts, no icon fonts, no JavaScript required to read the site.
 
 ![Systemone — an article, light appearance](https://raw.githubusercontent.com/zetxek/systemone/main/images/post-light.png)
 
-- **Demo:** [systemone-beta.vercel.app](https://systemone-beta.vercel.app)
+- **Demo:** [systemone-demo.vercel.app](https://systemone-demo.vercel.app)
 - **Design system:** [`docs/DESIGN-SYSTEM.md`](docs/DESIGN-SYSTEM.md) — the full
   rationale and token reference. It is the source of truth for every colour,
   size, weight, tracking, leading, radius, border and shadow in the theme.
